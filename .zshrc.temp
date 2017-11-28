@@ -1,0 +1,1 @@
+PROMPT="$fg[cyan]%}$USER@%{$fg[blue]%}%m ${PROMPT}"
