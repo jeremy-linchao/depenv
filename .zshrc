@@ -1,0 +1,1 @@
+plugins=(autojump vi-mode)
