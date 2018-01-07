@@ -7,7 +7,6 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -29,7 +28,6 @@ Bundle 'fatih/vim-go.git'
 Bundle 'altercation/vim-colors-solarized.git'
 Bundle 'justinmk/vim-syntax-extra.git'
 Bundle 'kchmck/vim-coffee-script.git'
-"Bundle 'elzr/vim-json.git'
 Bundle 'dgryski/vim-godef'
 Bundle 'Blackrush/vim-gocode'
 Bundle 'majutsushi/tagbar'
@@ -57,7 +55,7 @@ set autoindent
 set smartindent
 set nobackup
 set writebackup
-set hlsearch 
+set hlsearch
 set incsearch
 set autoread
 set nu
@@ -68,10 +66,10 @@ syntax on
 
 set wildignore+=.git,.svn,*.o,*.ob­j,tmp,*swp,*.log
 
-map <C-j> <C-W>j 
-map <C-k> <C-W>k 
-map <C-h> <C-W>h 
-map <C-l> <C-W>l 
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
 au! BufRead,BufNewFile *.js set syntax=jquery
 au! BufRead,BufNewFile *.less set syntax=css
@@ -85,6 +83,7 @@ au! BufRead,BufNewFile *.less set filetype=css
 au! BufRead,BufNewFile *.tpl set filetype=html
 au! BufNewFile,BufRead *.t2t set ft=txt2tags
 au! BufRead,BufNewFile *.sah set filetype=javascript
+au! BufRead,BufNewFile *.go set filetype=go
 
 " light blues
 hi xmlTagName guifg=#59ACE5
@@ -98,10 +97,9 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
 autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
 autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
-autocmd BufWritePre *.go :GoImports
-autocmd BufWritePre *.go :Fmt
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.jsx
-autocmd BufWritePost,FileWritePost *.go execute 'GoLint'
+
+autocmd BufWritePost,FileWritePost *.go :GoLint
+autocmd BufWritePost,FileWritePost *.go :GoImports
 
 let g:go_fmt_command = "goimports"
 let g:go_highlight_types = 1
@@ -109,33 +107,5 @@ let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-    \ }
 let g:jsx_ext_required = 0
 let g:typescript_indent_disable = 1
-
